@@ -24,10 +24,10 @@ NUM_SYMBOLIC_TAGS = 3
 
 # Regular expressions used to normalize digits.
 DIGIT_RE = re.compile(br"\d")
-BIAFFINE_PATH = "/home/ffajri/Workspace/RSTExtractor/models/biaffine"
+BIAFFINE_PATH = "models/biaffine"
 BIAFFINE_MODEL = "network.pt"
-RST_CONFIG_PATH = "/home/ffajri/Workspace/RSTExtractor/models/rst/config.cfg"
-DATA_PATH = '/home/ffajri/Data/Petition/UK/processed/merge/*'
+RST_CONFIG_PATH = "models/rst/config.cfg"
+DATA_PATH = os.path.join(sys.argv[1], '*.merge')
 THREADS = 10
 
 if not os.path.exists('output'):

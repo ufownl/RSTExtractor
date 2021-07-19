@@ -7,8 +7,8 @@ import math
 from multiprocessing import Process
 
 THREADS = 40
-SOURCE_PATH = '/home/ffajri/Data/Petition/US/processed/output_tree/*'
-TARGET_PATH = '/home/ffajri/Data/Petition/US/processed/output_shallow/'
+SOURCE_PATH = 'output_tree/*'
+TARGET_PATH = 'output_shallow/'
 allfiles = glob.glob(SOURCE_PATH)
 
 def run_thread(files):

@@ -103,6 +103,24 @@ def data_reader(file_path, biaffine):
     instance = Instance(sentences, syntax_features)
     return instance
 
+def export_stagedp(node, instance):
+    if not node is None:
+        if node.edu_span[0] == node.edu_span[1]:
+            node_type = "EDU"
+            node_body = "_!" + ("<P>_<S>_" if node.edu_span[0] == 0 else "<S>_") + "_".join(instance.edus[node.edu_span[0]].words) + "!_"
+        else:
+            if node.nuclear == "NUCLEAR SATELLITE":
+                node_type = "NS-"
+            elif node.nuclear == "SATELLITE NUCLEAR":
+                node_type = "SN-"
+            else:
+                node_type = "NN-"
+            node_type += node.relation
+            node_body = export_stagedp(node.left, instance) + " " + export_stagedp(node.right, instance)
+        return "(" + node_type + " " + node_body + ")"
+    else:
+        return ""
+
 files=glob.glob(DATA_PATH)
 
 def run_thread(files):
@@ -114,6 +132,8 @@ def run_thread(files):
         rst_data = rst.prepare_data([instance], 1)
         tree = rst.get_subtree(rst_data)[0]
         tree.save('output_tree/' + filename)
+        with open(filepath.replace(".merge", ".stagedp"), "w") as f:
+            f.write(export_stagedp(tree.obtain_tree(), instance))
 
 partitions  = []
 size = int(math.ceil(1.0*len(files)/THREADS))

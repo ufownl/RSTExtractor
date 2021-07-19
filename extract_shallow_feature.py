@@ -6,7 +6,7 @@ import threading
 import math
 from multiprocessing import Process
 
-THREADS = 40
+THREADS = 1
 SOURCE_PATH = 'output_tree/*'
 TARGET_PATH = 'output_shallow/'
 allfiles = glob.glob(SOURCE_PATH)

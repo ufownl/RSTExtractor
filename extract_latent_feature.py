@@ -28,7 +28,7 @@ BIAFFINE_PATH = "models/biaffine"
 BIAFFINE_MODEL = "network.pt"
 RST_CONFIG_PATH = "models/rst/config.cfg"
 DATA_PATH = os.path.join(sys.argv[1], '*.merge')
-THREADS = 10
+THREADS = 1
 
 if not os.path.exists('output'):
     os.makedirs('output')

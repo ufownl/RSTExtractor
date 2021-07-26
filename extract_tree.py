@@ -110,7 +110,7 @@ def export_stagedp(node, instance):
     if not node is None:
         if node.edu_span[0] == node.edu_span[1]:
             node_type = "EDU"
-            node_body = "_!" + ("<P>_<S>_" if node.edu_span[0] == 0 else "<S>_") + "_".join(instance.edus[node.edu_span[0]].words) + "!_"
+            node_body = "_!" + ("<P>_<S>_" if node.edu_span[0] == 0 else "<S>_") + "_".join([word if word != "(" and word != ")" else tag for word, tag in zip(instance.edus[node.edu_span[0]].words, instance.edus[node.edu_span[0]].tags)]) + "!_"
         else:
             if node.nuclear == "NUCLEAR SATELLITE":
                 node_type = "NS-"

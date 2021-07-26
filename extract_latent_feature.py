@@ -62,7 +62,10 @@ def form_sentence(lines, word_alpha, char_alpha, tag_alpha, symbolic_root=False,
             chars.append(c)
             char_ids.append(char_alpha.get_index(c))
         tag = '$' if data[4] == '#' else data[4]
-        tag_id = tag_alpha.get_index(tag)
+        try:
+            tag_id = tag_alpha.get_index(tag)
+        except KeyError:
+            tag_id = PAD_ID_TAG
         edu_id = int(data[9])
 
         words.append(word)
